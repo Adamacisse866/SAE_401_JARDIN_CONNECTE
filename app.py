@@ -1,22 +1,24 @@
 from flask import Flask, jsonify
-from flask_mysqldb import MySQL
+import mysql.connector
 
 app = Flask(__name__)
-app.config.from_object("config.Config")
 
-mysql = MySQL(app)
-
-@app.route("/")
-def index():
-    return "Connexion MySQL réussie Adama !"
+# Connexion à la base de données
+conn = mysql.connector.connect(
+    host="localhost", user="root", password="", database="jardin_connecte"
+)
+cursor = conn.cursor(dictionary=True)
 
 @app.route("/events", methods=["GET"])
 def get_events():
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM events")
-    events = cur.fetchall()
-    cur.close()
-    
+    cursor.execute("SELECT * FROM events")
+    events = cursor.fetchall()
+
+    # Convertir l'heure (timedelta) en format lisible "HH:MM:SS"
+    for event in events:
+        if isinstance(event["heure"], str) == False:  # Vérifie si c'est bien un timedelta
+            event["heure"] = str(event["heure"])  # Convertir timedelta en string
+
     return jsonify(events)
 
 if __name__ == "__main__":
