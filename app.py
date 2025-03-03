@@ -8,7 +8,7 @@ mysql = MySQL(app)
 
 @app.route("/")
 def index():
-    return "Connexion MySQL réussie !"
+    return "Connexion MySQL réussie Adama !"
 
 @app.route("/events", methods=["GET"])
 def get_events():
