@@ -71,9 +71,14 @@ def login():
 
         if user and check_password_hash(user['password'], password):
             user_obj = User(user['id'], user['username'], user['email'], user['role'])
-            login_user(user_obj)
+            login_user(user_obj, remember=True)
+            print(f"Utilisateur connecté : {user_obj.username}, rôle : {user_obj.role}")
             flash('Connexion réussie !')
-            return redirect(url_for('home'))
+            # Vérifier le rôle de l'utilisateur et rediriger
+            if user_obj.role == 'admin':
+                return redirect(url_for('admin'))  # Rediriger vers la page admin
+            else:
+                return redirect(url_for('home'))  # Rediriger vers la page utilisateur
         else:
             flash('Nom d\'utilisateur ou mot de passe incorrect.')
 
@@ -91,6 +96,7 @@ def logout():
 @app.route('/admin')
 @login_required
 def admin():
+    print(f"Utilisateur connecté : {current_user.username}, rôle : {current_user.role}")
     if current_user.role != 'admin':
         flash('Accès interdit, vous devez être administrateur.')
         return redirect(url_for('home'))
@@ -116,7 +122,7 @@ def get_plantes():
 @app.route('/')
 def home():
     plantes = get_plantes()  # Récupérer les plantes
-    return render_template('home.html', plantes=plantes)
+    return render_template('login.html', plantes=plantes)
 
 if __name__ == "__main__":
     app.run(debug=True)
