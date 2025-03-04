@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un utilisateur</title>
+</head>
+<body>
+    <h1>Créer un utilisateur</h1>
+    <form id="registerForm">
+        <label for="username">Nom d'utilisateur :</label><br>
+        <input type="text" id="username" name="username" required><br><br>
+        
+        <label for="email">Email :</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="password">Mot de passe :</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <input type="submit" value="S'inscrire">
+    </form>
+
+    <div id="response"></div>
+
+    <script>
+        // Capter l'événement de soumission du formulaire
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêcher la soumission classique du formulaire
+
+            // Récupérer les valeurs du formulaire
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Créer un objet de données à envoyer
+            const userData = {
+                username: username,
+                email: email,
+                password: password
+            };
+
+            // Envoyer la requête POST à l'API
+            fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username: 'test', password: 'test123' })
+            })
+            .then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

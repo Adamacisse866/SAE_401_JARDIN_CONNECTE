@@ -10,4 +10,4 @@ class Config:
     SOCKETIO_REDIS_URL = 'redis://localhost:6379'
     MAPBOX_ACCESS_TOKEN = 'mapbox_access_token_here'
     PLANT_ID_API_KEY = 'plant_id_api_key_here'
-    WEB_PUSH_API_KEY = 'web_push_api_key_here'
+    WEB_PUSH_API_KEY = 'web_push_api_key_dsfe'
