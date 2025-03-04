@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jardin Connecté - Accueil</title>
+</head>
+<body>
+    <h1>Bienvenue sur le Jardin Connecté de l'iut</h1>
+
+    <h2>Liste des plantes</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Statut</th>
+                <th>Quantité</th>
+                <th>Usages</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for plante in plantes %}
+            <tr>
+                <td>{{ plante[1] }}</td>
+                <td>{{ plante[2] }}</td>
+                <td>{{ plante[3] }}</td>
+                <td>{{ plante[4] }}</td>
+                <td>{{ plante[5] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
