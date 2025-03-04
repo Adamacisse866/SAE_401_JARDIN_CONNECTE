@@ -40,6 +40,7 @@ def signup():
         password = request.form['password']
         hashed_password = generate_password_hash(password)  # Crypter le mot de passe
 
+
         # Vérifier si l'utilisateur existe déjà
         if get_user_by_username(username):
             flash('Nom d\'utilisateur déjà pris.')
@@ -93,7 +94,7 @@ def admin():
     if current_user.role != 'admin':
         flash('Accès interdit, vous devez être administrateur.')
         return redirect(url_for('home'))
-    return render_template('home_admin.html')
+    return render_template('admin.html')
 
 # Fonction pour récupérer les plantes depuis la base de données
 def get_plantes():
