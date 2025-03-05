@@ -12,7 +12,7 @@ body {
 
 .carousel-item {
     padding: 3rem;
-    background-color: #fff;
+    
     border-radius: 0.5rem;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
   }
@@ -41,3 +41,10 @@ body {
     background-position: center;
     border-radius: 0.5rem;
 }
+
+
+/* Frame 68 */
+
+/* Auto layout */
+
+
