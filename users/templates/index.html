@@ -3,54 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer un utilisateur</title>
+    <title>Jardin Connecté</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-    <h1>Créer un utilisateur</h1>
-    <form id="registerForm">
-        <label for="username">Nom d'utilisateur :</label><br>
-        <input type="text" id="username" name="username" required><br><br>
-        
-        <label for="email">Email :</label><br>
-        <input type="email" id="email" name="email" required><br><br>
+    <div class="container mt-4">
+        <h2>Événements accueil</h2>
+        <div id="eventsCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" id="carousel-content">
+                <!-- Les événements seront injectés ici via JavaScript -->
+            </div>
 
-        <label for="password">Mot de passe :</label><br>
-        <input type="password" id="password" name="password" required><br><br>
-
-        <input type="submit" value="S'inscrire">
-    </form>
-
-    <div id="response"></div>
+            <!-- Contrôles du carousel -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#eventsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Précédent</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#eventsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Suivant</span>
+            </button>
+        </div>
+    </div>
 
     <script>
-        // Capter l'événement de soumission du formulaire
-        document.getElementById('registerForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Empêcher la soumission classique du formulaire
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/api/events')
+                .then(response => response.json())
+                .then(events => {
+                    const carouselContent = document.getElementById("carousel-content");
+                    carouselContent.innerHTML = ""; // Nettoyer le contenu existant
+                    
+                    events.forEach((event, index) => {
+                        const activeClass = index === 0 ? "active" : "";
 
-            // Récupérer les valeurs du formulaire
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            // Créer un objet de données à envoyer
-            const userData = {
-                username: username,
-                email: email,
-                password: password
-            };
-
-            // Envoyer la requête POST à l'API
-            fetch('/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username: 'test', password: 'test123' })
-            })
-            .then(response => response.json())
-.then(data => console.log(data))
-.catch(error => console.error('Error:', error));
+                        const eventItem = `
+                            <div class="carousel-item ${activeClass}">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3>${event.title}</h3>
+                                        <p>
+                                            ${event.link 
+                                                ? `<a href="${event.link}" target="_blank">${event.description}</a>` 
+                                                : event.description}
+                                        </p>
+                                        ${event.link 
+                                            ? `<a href="${event.link}" target="_blank" class="btn btn-primary">En savoir plus</a>` 
+                                            : ""}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="event-image" 
+                                            style="background-image: url('${event.image_url}'); 
+                                                   height: 250px; 
+                                                   background-size: cover; 
+                                                   background-position: center;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        carouselContent.innerHTML += eventItem;
+                    });
+                })
+                .catch(error => console.log("Erreur de récupération des événements :", error));
         });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

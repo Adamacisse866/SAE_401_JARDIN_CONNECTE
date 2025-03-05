@@ -6,10 +6,12 @@ from models.plant import Plant
 from models.event import Event
 from models.idea import Idea
 from flask_cors import CORS
+from routes.event_routes import event_routes
+
 
 app = Flask(__name__)
 CORS(app)
-
+app.register_blueprint(event_routes)
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
