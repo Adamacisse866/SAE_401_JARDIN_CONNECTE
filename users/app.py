@@ -17,10 +17,24 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
 
-@app.route("/")
+#mYancheng modifi ! les routes pour acceder les pages diffirents
+@app.route("/home")
 def index():
     # Rendre le fichier index.html depuis le dossier templates
-    return render_template("index.html")
+    return render_template('index.html', active_nav='home')
+
+@app.route('/apprentissage')
+def apprentissage():
+    return render_template('apprentissage.html', active_nav='apprentissage')
+
+@app.route('/communaute')
+def communaute():
+    return render_template('communaute.html', active_nav='communaute')
+
+@app.route('/scanner')
+def scanner():
+    return render_template('scanner.html', active_nav='scanner')
+
 
 @app.route("/test-db")
 def test_db():

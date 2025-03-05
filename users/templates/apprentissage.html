@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Apprentissage - Jardin Connecté{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="/users/static/apprentissage.css">
+{% endblock %}
+
+{% block content %}
+<!-- Section 1 -->
+<div class="container mt-4 section1">
+  <div class="row">
+    <div class="col-12 text-right mb-4">
+      <h1>La Biodiversité</h1>
+      <p>Un trésor à préserver et à cultiver ensemble !</p>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card custom-card mb-4">
+        <!-- 此处可以通过 API 替换 video 元素 -->
+        <video class="card-img-top" controls>
+          <source src="your-video-url.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="card-body">
+          <!-- 如果需要，可通过 JS 动态加载视频内容 -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 text-right mb-4">
+      <h1>WIKI</h1>
+      <p>Un coin pour apprendre et se renseigner.</p>
+    </div>
+  </div>
+
+  <div class="row row-cols-2 row-cols-md-2 g-2 text-center">
+    <div class="col">
+      <a href="faune-page.html" class="card-link">
+        <div class="card">
+          <!-- img -->
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+          </div>
+        </div>        
+      </a>
+    </div>
+    <div class="col">
+      <a href="faune-page.html" class="card-link">
+        <div class="card">
+          <!-- img -->
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+          </div>
+        </div>        
+      </a>
+    </div>
+  </div>    
+</div>
+
+<!-- Section 2 -->
+<div class="container mt-4 section2">
+  <div class="row">
+    <div class="col-12 text-right mb-4">
+      <h1>Aider en 3 étapes !</h1>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-3">
+    <div class="card text-bg-dark aide-card">
+      <img src="bgreen.png" class="card-img" alt="...">
+      <div class="card-img-overlay">
+        <h2 class="card-title">Les déchets au compost!</h2>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small>Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card text-bg-dark aide-card">
+      <img src="..." class="card-img" alt="...">
+      <div class="card-img-overlay">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small>Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card text-bg-dark aide-card">
+      <img src="..." class="card-img" alt="...">
+      <div class="card-img-overlay">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small>Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
